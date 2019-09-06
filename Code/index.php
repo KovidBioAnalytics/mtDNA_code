@@ -232,44 +232,44 @@ if(isset($_FILES["fastafile"])){
 	/*If $haplo_key is NewFound executes the $inal result below the case "NewFound": and breaks the loop*/
                     case "NewFound":
                     $final_result .= "<ul>";
-                    $final_result .= "<li>Recent mtDNA studies mentions that, the haplogroup <b>".$input_subclade."</b> is found in India <br>(with lower frequency).</li>";
-                    $final_result .= "<li>Overview of the evolution of the predicted lineage L3-->M-->".$input_subclade."</li>";
+                    $final_result .= "<li>Recent mtDNA studies mentions that, the haplogroup <b>".$input_subclade."</b> is found in India (with lower frequency).</li>";
+                    $final_result .= "<li>Overview of the evolution of the predicted lineage L3 --> M --> ".$input_subclade."</li>";
                     $final_result .= "<ul>";
                     break;
 
 	/*If $haplo_key is M executes the $inal result below the case "M": and breaks the loop*/
                     case "M":
                     $final_result .= "<ul>";
-                    $final_result .= "<li>Haplogroup predicted is <b>".$input_subclade."</b>, which is sublineage of haplogroup <b>".$haplo_key."</b><br> predominantly found in India.</li>";
+                    $final_result .= "<li>Haplogroup predicted is <b>".$input_subclade."</b>, which is sublineage of haplogroup <b>".$haplo_key."</b> predominantly found in India.</li>";
                     $final_result .= "<li>The most common recent ancestor of the input sample is  ".$input_subclade.".</li>";
-                    $final_result .= "<li>Overview of the evolution of the predicted lineage L3-->".$haplo_key."-->".$input_subclade."</li>";
+                    $final_result .= "<li>Overview of the evolution of the predicted lineage L3 --> ".$haplo_key." --> ".$input_subclade."</li>";
                     $final_result .= "<ul>";
                     break;
 
 	/*If $haplo_key is N executes the $inal result below the case "N": and breaks the loop*/
                     case "N":
                     $final_result .= "<ul>";
-                    $final_result .= "<li>Haplogroup predicted is <b>".$input_subclade."</b>, which is sublineage of haplogroup <b>".$haplo_key."</b><br> predominantly found in India.</li>";
+                    $final_result .= "<li>Haplogroup predicted is <b>".$input_subclade."</b>, which is sublineage of haplogroup <b>".$haplo_key."</b> predominantly found in India.</li>";
                     $final_result .= "<li>The most common recent ancestor of the input sample is  ".$input_subclade.".</li>";
-                    $final_result .= "<li>Overview of the evolution of the predicted lineage L3-->".$haplo_key."-->".$input_subclade."</li>";
+                    $final_result .= "<li>Overview of the evolution of the predicted lineage L3 --> ".$haplo_key." --> ".$input_subclade."</li>";
                     $final_result .= "<ul>";
                     break;
 
 	/*If $haplo_key is R executes the $inal result below the case "R": and breaks the loop*/
                     case "R":
                     $final_result .= "<ul>";
-                    $final_result .= "<li>Haplogroup predicted is <b>".$input_subclade."</b>, which is sublineage of haplogroup <b>".$haplo_key."</b><br> predominantly found in India.</li>";
+                    $final_result .= "<li>Haplogroup predicted is <b>".$input_subclade."</b>, which is sublineage of haplogroup <b>".$haplo_key."</b> predominantly found in India.</li>";
                     $final_result .= "<li>The most common recent ancestor of the input sample is  ".$input_subclade.".</li>";
-                    $final_result .= "<li>Overview of the evolution of the predicted lineage L3-->N-->".$haplo_key."-->".$input_subclade."</li>";
+                    $final_result .= "<li>Overview of the evolution of the predicted lineage L3 --> N --> ".$haplo_key." --> ".$input_subclade."</li>";
                     $final_result .= "<ul>";
                     break;
 
 	/*If $haplo_key is U executes the $inal result below the case "U": and breaks the loop*/
                     case "U":
                     $final_result .= "<ul>";
-                    $final_result .= "<li>Haplogroup predicted is <b>".$input_subclade."</b>, which is sublineage of haplogroup <b>".$haplo_key."</b><br> predominantly found in India.</li>";
+                    $final_result .= "<li>Haplogroup predicted is <b>".$input_subclade."</b>, which is sublineage of haplogroup <b>".$haplo_key."</b> predominantly found in India.</li>";
                     $final_result .= "<li>The most common recent ancestor of the input sample is  ".$input_subclade.".</li>";
-                    $final_result .= "<li>Overview of the evolution of the predicted lineage L3-->N-->R-->".$haplo_key."-->".$input_subclade."</li>";
+                    $final_result .= "<li>Overview of the evolution of the predicted lineage L3 --> N --> R --> ".$haplo_key." --> ".$input_subclade."</li>";
                     $final_result .= "<ul>";
                     break;
                 }
@@ -325,12 +325,10 @@ function array_column(array $input, $columnKey, $indexKey = null) {
                         </center>
                     </div>
                     <div class="modal-body" style="display: block">
-                        <center>
                             <font style="font-size: 18px;font-color: green;" id="fontID">
                                 <?php echo $output;?></font>
-                        </center>
                         <div class="row">
-                            <div class="col-md-12 col-sm-12 col-sm-12 col-xs-12" id="resultDivID">
+                            <div class="col-md-12 col-sm-12 col-sm-12 col-xs-12" style="margin-left: -25px;" id="resultDivID">
                                 <?php echo $final_result; ?>
                             </div>
                         </div>
