@@ -22,6 +22,13 @@
 Product Admin CSS Template
 https://templatemo.com/tm-524-product-admin
 -->
+    <script>
+	function disableButton(btnID){
+		$("#"+btnID).attr("disabled",true);
+		$("#"+btnID).css("cursor","not-allowed");
+		return true;
+	}	
+    </script>
     </head>
     <body oncontextmenu="return false;">
         <?php	
@@ -38,7 +45,7 @@ $indian_haplo_arr = array(
         ),
         "lineage" => "",
         "subclades" => array(
-            "M","N"
+           "M","N" 
         ),
     ),
     "M" => array(
@@ -89,7 +96,7 @@ if(isset($_FILES["fastafile"])){
     $check = 1;
     try{
 	/*Locatin of the input file to be stored and python script to be executed*/
-        $target_dir = "/usr/local/mtDNATest/";
+        $target_dir = "/usr/local/mtDNA/mtDNATest/";
 
 	/*The input field name and name of the file which is uploading*/
         $file = $_FILES['fastafile']['name'];
@@ -147,16 +154,20 @@ if(isset($_FILES["fastafile"])){
 
 	/*Gets line from file*/
                 $result = fgets($fn);
+		
+	/*checking whether result is empty or not, if not then only proceeding further to push those values into array else skipping the empty value*/
+		if(!(empty($result))){
 	
 	/*Creates the array of strings seperated by tab space*/
-                $result_arr =  explode("\t",$result);
+                	$result_arr =  explode("\t",$result);
                 //echo "variant: ".$result_arr[0]." ... haplogroup: ".$result_arr[1];
 
 	/*Pushes the $result_arr[0] in $variant_array*/
-                array_push($variant_array,$result_arr[0]);
+                	array_push($variant_array,$result_arr[0]);
 
 	/*Stores the first element of $result_arr in variable $haplogroup*/
-                $haplogroup = $result_arr[1];
+                	$haplogroup = $result_arr[1];
+		}
                 //echo "<br>";
             }
 	/*Closes the file*/
@@ -181,12 +192,12 @@ if(isset($_FILES["fastafile"])){
 
 	/*Key stored in varaible*/
                 $input_subclade = $key;
+
 	
 	/*Returns values form single column 'subclades' of array $indian_haplo_arr*/
                 $arr = array_column($indian_haplo_arr, 'subclades');
-
 	/*Declare variable current_key*/
-                $current_key = "";
+                $current_key = "-1";
 
 	/*Till each key value pair in arr the loop executes. This is to check whether subclades from python script output exists into the Indian haplogroup list and if exists, retrieve it's key index in order to retrieve it's parent haplogroup*/
                 foreach($arr as $k => $v){
@@ -199,10 +210,9 @@ if(isset($_FILES["fastafile"])){
                         break;
                     }    
                 }
-                //echo $current_key;
 
 	/*If $current_key is blank the $haplo_key becomes 'Not found' which means it is not an Indian sample*/
-                if($current_key == ""){
+                if($current_key == "-1"){
                     $haplo_key = "NotFound";
 
 	/*If $indian_haplo_count is $current_key+1 the $haplo_key becomes 'New found' which means it is an Indian sample by not in a pre-defined list but predicted to be Indian sample by latest research*/
@@ -218,7 +228,6 @@ if(isset($_FILES["fastafile"])){
 	/*Matches the current key from array and finds haplo_key from the ARRAY*/
                     $haplo_key = $key_array[$current_key];
                 }
-	
 	/*Matches the case and executes code accordingly*/
                 switch ($haplo_key) {
 
@@ -234,6 +243,14 @@ if(isset($_FILES["fastafile"])){
                     $final_result .= "<ul>";
                     $final_result .= "<li>Recent mtDNA studies mentions that, the haplogroup <b>".$input_subclade."</b> is found in India (with lower frequency).</li>";
                     $final_result .= "<li>Overview of the evolution of the predicted lineage L3 --> M --> ".$input_subclade."</li>";
+                    $final_result .= "<ul>";
+                    break;
+
+		    case "L3":
+ 		    $final_result .= "<ul>";
+                    $final_result .= "<li>Haplogroup predicted is <b>".$input_subclade."</b>, which is a descendant of haplogroup <b>".$haplo_key."</b> predominantly found in India.</li>";
+                    $final_result .= "<li>The most common recent ancestor of the input sample is  ".$input_subclade.".</li>";
+                    $final_result .= "<li>Overview of the evolution of the predicted lineage L3 --> ".$input_subclade."</li>";
                     $final_result .= "<ul>";
                     break;
 
@@ -285,7 +302,7 @@ if(isset($_FILES["fastafile"])){
 }
 
 /*Returns values from specified key within the multidimensional  array */
-function array_column(array $input, $columnKey, $indexKey = null) {
+/*function array_column(array $input, $columnKey, $indexKey = null) {
     $array = array();
     foreach ($input as $value) {
         if ( !array_key_exists($columnKey, $value)) {
@@ -308,7 +325,7 @@ function array_column(array $input, $columnKey, $indexKey = null) {
         }
     }
     return $array;
-}
+}*/
         ?>
         <!-- Modal to Display Output -->
         <div class="modal fade" id="myModal" role="dialog" data-backdrop="static" data-keyboard="false">
@@ -356,7 +373,7 @@ margin-top: 12%;">
             </div>
             <div class="row mt-2">
                 <div class="col-12">
-                    <form method="post" class="tm-login-form" enctype="multipart/form-data">
+                    <form method="post" class="tm-login-form" onsubmit="return disableButton('uploadfile');" enctype="multipart/form-data">
                         <div class="form-group">
                             <p class="text-center text-white mb-0 px-4 small">
                                 <b>
