@@ -442,7 +442,7 @@ $html_text = "<div class='modal-body' style='display: block'>
                 $html_text .= "<font style='font-size: 17px;' id=''><b>".$output_arr[0]."</b></font>
                             <br>
                             <br>
-                            <font style='font-size: 17px;' id=''><b>Haplogorup:</b></font>
+                            <font style='font-size: 17px;' id=''><b>Haplogroup:</b></font>
                             <br>
                             <font style='font-size: 17px;' id=''>".$final_result."</font>
                             <font style='font-size: 17px;' id=''><b>Conclusion:</b></font>
